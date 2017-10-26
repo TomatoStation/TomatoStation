@@ -95,10 +95,17 @@
 
 	var/list/breath_gases = breath.gases
 
+<<<<<<< HEAD
 	breath.assert_gases(/datum/gas/oxygen, /datum/gas/plasma, /datum/gas/carbon_dioxide, /datum/gas/nitrous_oxide, /datum/gas/bz, /datum/gas/nitrogen, /datum/gas/tritium, /datum/gas/brown_gas, /datum/gas/pluoxium, /datum/gas/stimulum)
 
 	//Partial pressures in our breath
 	var/O2_pp = breath.get_breath_partial_pressure(breath_gases[/datum/gas/oxygen][MOLES])+(8*breath.get_breath_partial_pressure(breath_gases[/datum/gas/pluoxium][MOLES]))
+=======
+	breath.assert_gases(/datum/gas/oxygen, /datum/gas/plasma, /datum/gas/carbon_dioxide, /datum/gas/nitrous_oxide, /datum/gas/bz, /datum/gas/nitrogen)
+
+	//Partial pressures in our breath
+	var/O2_pp = breath.get_breath_partial_pressure(breath_gases[/datum/gas/oxygen][MOLES])
+>>>>>>> 228af28... initial commit
 	var/N2_pp = breath.get_breath_partial_pressure(breath_gases[/datum/gas/nitrogen][MOLES])
 	var/Toxins_pp = breath.get_breath_partial_pressure(breath_gases[/datum/gas/plasma][MOLES])
 	var/CO2_pp = breath.get_breath_partial_pressure(breath_gases[/datum/gas/carbon_dioxide][MOLES])
@@ -252,6 +259,7 @@
 				H.adjustBrainLoss(3)
 		else if(bz_pp > 0.01)
 			H.hallucination += 5//Removed at 2 per tick so this will slowly build up
+<<<<<<< HEAD
 
 
 	// Tritium
@@ -286,6 +294,11 @@
 		breath_gases[/datum/gas/stimulum][MOLES]-=gas_breathed
 		handle_breath_temperature(breath, H)
 		breath.garbage_collect()
+=======
+		handle_breath_temperature(breath, H)
+		breath.garbage_collect()
+
+>>>>>>> 228af28... initial commit
 	return TRUE
 
 

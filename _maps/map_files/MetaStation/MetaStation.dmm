@@ -77684,7 +77684,11 @@
 /turf/open/floor/plating,
 /area/engine/engineering)
 "deZ" = (
+<<<<<<< HEAD
 /obj/machinery/portable_atmospherics/canister/nitrous_oxide,
+=======
+/obj/machinery/portable_atmospherics/canister/freon,
+>>>>>>> 228af28... initial commit
 /turf/open/floor/plating,
 /area/engine/engineering)
 "dfa" = (
@@ -120477,7 +120481,11 @@ aGS
 axY
 aJl
 aKx
+<<<<<<< HEAD
 aJu
+=======
+deZ
+>>>>>>> 228af28... initial commit
 aNo
 axY
 aPW

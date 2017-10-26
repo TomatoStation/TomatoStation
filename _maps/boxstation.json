@@ -1,5 +1,16 @@
+<<<<<<< HEAD
 {
     "map_name": "Box Station",
     "map_path": "map_files/BoxStation",
     "map_file": "BoxStation.dmm"
 }
+=======
+{
+    "map_name": "Box Station",
+    "map_path": "map_files/BoxStation",
+    "map_file": "BoxStation.dmm",
+    "minetype": "lavaland",
+    "transition_config": "default",
+    "allow_custom_shuttles": "yes"
+}
+>>>>>>> 228af28... initial commit

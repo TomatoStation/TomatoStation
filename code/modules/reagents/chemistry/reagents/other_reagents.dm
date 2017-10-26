@@ -1159,6 +1159,7 @@
 		M.confused = min(M.confused + 2, 5)
 	..()
 
+<<<<<<< HEAD
 /datum/reagent/stimulum
 	name = "Stimulum"
 	id = "stimulum"
@@ -1187,6 +1188,8 @@
 /datum/reagent/browngas/on_mob_life(mob/living/M) //Has just a speedup
 	M.status_flags |= GOTTAGOFAST
 
+=======
+>>>>>>> 228af28... initial commit
 /////////////////////////Coloured Crayon Powder////////////////////////////
 //For colouring in /proc/mix_color_from_reagents
 

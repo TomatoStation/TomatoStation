@@ -362,6 +362,7 @@ SUBSYSTEM_DEF(garbage)
 
 	testing("Beginning search for references to a [type].")
 	last_find_references = world.time
+<<<<<<< HEAD
 
 	DoSearchVar(GLOB) //globals
 	for(var/datum/thing in world) //atoms (don't beleive it's lies)
@@ -373,6 +374,11 @@ SUBSYSTEM_DEF(garbage)
 	for (var/client/thing) //clients
 		DoSearchVar(thing, "World -> [thing]")
 
+=======
+	DoSearchVar(GLOB)
+	for(var/datum/thing in world)
+		DoSearchVar(thing, "WorldRef: [thing]")
+>>>>>>> 228af28... initial commit
 	testing("Completed search for references to a [type].")
 	if(usr && usr.client)
 		usr.client.running_find_references = null
@@ -392,16 +398,23 @@ SUBSYSTEM_DEF(garbage)
 	if(!running_find_references)
 		find_references(TRUE)
 
+<<<<<<< HEAD
 /datum/proc/DoSearchVar(X, Xname, recursive_limit = 64)
 	if(usr && usr.client && !usr.client.running_find_references)
 		return
 	if (!recursive_limit)
 		return
 
+=======
+/datum/proc/DoSearchVar(X, Xname)
+	if(usr && usr.client && !usr.client.running_find_references)
+		return
+>>>>>>> 228af28... initial commit
 	if(istype(X, /datum))
 		var/datum/D = X
 		if(D.last_find_references == last_find_references)
 			return
+<<<<<<< HEAD
 
 		D.last_find_references = last_find_references
 		var/list/L = D.vars
@@ -430,6 +443,30 @@ SUBSYSTEM_DEF(garbage)
 				DoSearchVar(I, "[Xname] -> list", recursive_limit-1)
 
 #ifndef FIND_REF_NO_CHECK_TICK
+=======
+		D.last_find_references = last_find_references
+		for(var/V in D.vars)
+			for(var/varname in D.vars)
+				var/variable = D.vars[varname]
+				if(variable == src)
+					testing("Found [src.type] \ref[src] in [D.type]'s [varname] var. [Xname]")
+				else if(islist(variable))
+					if(src in variable)
+						testing("Found [src.type] \ref[src] in [D.type]'s [varname] list var. Global: [Xname]")
+#ifdef GC_FAILURE_HARD_LOOKUP
+					for(var/I in variable)
+						DoSearchVar(I, TRUE)
+				else
+					DoSearchVar(variable, "[Xname]: [varname]")
+#endif
+	else if(islist(X))
+		if(src in X)
+			testing("Found [src.type] \ref[src] in list [Xname].")
+#ifdef GC_FAILURE_HARD_LOOKUP
+		for(var/I in X)
+			DoSearchVar(I, Xname + ": list")
+#else
+>>>>>>> 228af28... initial commit
 	CHECK_TICK
 #endif
 

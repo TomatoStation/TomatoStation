@@ -1,5 +1,16 @@
+<<<<<<< HEAD
 {
     "map_name": "Runtime Station",
     "map_path": "map_files/debug",
     "map_file": "runtimestation.dmm"
 }
+=======
+{
+    "map_name": "Runtime Station",
+    "map_path": "map_files/debug",
+    "map_file": "runtimestation.dmm",
+    "minetype": "lavaland",
+    "transition_config": "default",
+    "allow_custom_shuttles": "no"
+}
+>>>>>>> 228af28... initial commit

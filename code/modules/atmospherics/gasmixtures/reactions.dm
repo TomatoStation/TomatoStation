@@ -1,5 +1,6 @@
 #define NO_REACTION	0
 #define REACTING	1
+<<<<<<< HEAD
 //Plasma fire properties
 #define OXYGEN_BURN_RATE_BASE				1.4
 #define PLASMA_BURN_RATE_DELTA				9
@@ -28,6 +29,9 @@
 #define CATALYST_COEFFICENT					0.01
 #define FUSION_PURITY_THRESHOLD				0.9
 #define FUSION_HEAT_DROPOFF					20000+T0C
+=======
+
+>>>>>>> 228af28... initial commit
 /datum/controller/subsystem/air/var/list/gas_reactions //this is our singleton of all reactions
 
 /proc/init_gas_reactions()
@@ -62,6 +66,7 @@
 /datum/gas_reaction/proc/react(datum/gas_mixture/air, atom/location)
 	return NO_REACTION
 
+<<<<<<< HEAD
 /datum/gas_reaction/nobliumsupression
 	priority = INFINITY
 	name = "Hyper-Noblium Reaction Supression"
@@ -71,6 +76,50 @@
 
 /datum/gas_reaction/nobliumsupression/react()
 	return STOP_REACTIONS
+=======
+//agent b: converts hot co2 and agent b to oxygen. requires plasma as a catalyst. endothermic
+/datum/gas_reaction/agent_b
+	priority = 2
+	name = "Agent B"
+	id = "agent_b"
+
+/datum/gas_reaction/agent_b/init_reqs()
+	min_requirements = list(
+		"TEMP" = 900,
+		/datum/gas/oxygen_agent_b = MINIMUM_HEAT_CAPACITY,
+		/datum/gas/plasma = MINIMUM_HEAT_CAPACITY,
+		/datum/gas/carbon_dioxide = MINIMUM_HEAT_CAPACITY
+	)
+
+
+/datum/gas_reaction/agent_b/react(datum/gas_mixture/air)
+	var/list/cached_gases = air.gases
+	var/reaction_rate = min(cached_gases[/datum/gas/carbon_dioxide][MOLES]*0.75, cached_gases[/datum/gas/plasma][MOLES]*0.25, cached_gases[/datum/gas/oxygen_agent_b][MOLES]*0.05)
+
+	cached_gases[/datum/gas/carbon_dioxide][MOLES] -= reaction_rate
+	cached_gases[/datum/gas/oxygen_agent_b][MOLES] -= reaction_rate*0.05
+
+	ASSERT_GAS(/datum/gas/oxygen, air) //only need to assert oxygen, as this reaction doesn't occur without the other gases existing
+	cached_gases[/datum/gas/oxygen][MOLES] += reaction_rate
+
+	air.temperature -= (reaction_rate*20000)/air.heat_capacity()
+
+	return REACTING
+
+//freon: does a freezy thing?
+/datum/gas_reaction/freon
+	priority = 1
+	name = "Freon"
+	id = "freon"
+
+/datum/gas_reaction/freon/init_reqs()
+	min_requirements = list(/datum/gas/freon = MOLES_PLASMA_VISIBLE)
+
+/datum/gas_reaction/freon/react(datum/gas_mixture/air, turf/open/location)
+	. = NO_REACTION
+	if(location && location.freon_gas_act())
+		. = REACTING
+>>>>>>> 228af28... initial commit
 
 //water vapor: puts out fires?
 /datum/gas_reaction/water_vapor
@@ -79,6 +128,7 @@
 	id = "vapor"
 
 /datum/gas_reaction/water_vapor/init_reqs()
+<<<<<<< HEAD
 	min_requirements = list(/datum/gas/water_vapor = MOLES_GAS_VISIBLE)
 
 /datum/gas_reaction/water_vapor/react(datum/gas_mixture/air, turf/open/location)
@@ -88,6 +138,14 @@
 			. = REACTING
 	else if(location && location.water_vapor_gas_act())
 		air.gases[/datum/gas/water_vapor][MOLES] -= MOLES_GAS_VISIBLE
+=======
+	min_requirements = list(/datum/gas/water_vapor = MOLES_PLASMA_VISIBLE)
+
+/datum/gas_reaction/water_vapor/react(datum/gas_mixture/air, turf/open/location)
+	. = NO_REACTION
+	if(location && location.water_vapor_gas_act())
+		air.gases[/datum/gas/water_vapor][MOLES] -= MOLES_PLASMA_VISIBLE
+>>>>>>> 228af28... initial commit
 		. = REACTING
 
 //fire: combustion of plasma and volatile fuel (treated as hydrocarbons). creates hotspots. exothermic
@@ -97,7 +155,11 @@
 	id = "fire"
 
 /datum/gas_reaction/fire/init_reqs()
+<<<<<<< HEAD
 	min_requirements = list("TEMP" = FIRE_MINIMUM_TEMPERATURE_TO_EXIST) //doesn't include plasma reqs b/c of other, rarer, burning gases.
+=======
+	min_requirements = list("TEMP" = FIRE_MINIMUM_TEMPERATURE_TO_EXIST) //doesn't include plasma reqs b/c of volatile fuel stuff - consider finally axing volatile fuel
+>>>>>>> 228af28... initial commit
 
 /datum/gas_reaction/fire/react(datum/gas_mixture/air, turf/open/location)
 	var/energy_released = 0
@@ -108,6 +170,7 @@
 	cached_results[id] = 0
 
 	//General volatile gas burn
+<<<<<<< HEAD
 	if(cached_gases[/datum/gas/tritium] && cached_gases[/datum/gas/tritium][MOLES])
 		var/burned_fuel
 		if(!cached_gases[/datum/gas/oxygen])
@@ -119,12 +182,29 @@
 			burned_fuel = cached_gases[/datum/gas/tritium][MOLES]*TRITIUM_BURN_TRIT_FACTOR
 			cached_gases[/datum/gas/tritium][MOLES] -= cached_gases[/datum/gas/tritium][MOLES]/TRITIUM_BURN_TRIT_FACTOR
 			cached_gases[/datum/gas/oxygen][MOLES] -= cached_gases[/datum/gas/tritium][MOLES]
+=======
+	if(cached_gases[/datum/gas/volatile_fuel] && cached_gases[/datum/gas/volatile_fuel][MOLES])
+		var/burned_fuel
+		if(!cached_gases[/datum/gas/oxygen])
+			burned_fuel = 0
+		else if(cached_gases[/datum/gas/oxygen][MOLES] < cached_gases[/datum/gas/volatile_fuel][MOLES])
+			burned_fuel = cached_gases[/datum/gas/oxygen][MOLES]
+			cached_gases[/datum/gas/volatile_fuel][MOLES] -= burned_fuel
+			cached_gases[/datum/gas/oxygen][MOLES] = 0
+		else
+			burned_fuel = cached_gases[/datum/gas/volatile_fuel][MOLES]
+			cached_gases[/datum/gas/oxygen][MOLES] -= cached_gases[/datum/gas/volatile_fuel][MOLES]
+>>>>>>> 228af28... initial commit
 
 		if(burned_fuel)
 			energy_released += FIRE_CARBON_ENERGY_RELEASED * burned_fuel
 
 			ASSERT_GAS(/datum/gas/carbon_dioxide, air)
+<<<<<<< HEAD
 			cached_gases[/datum/gas/carbon_dioxide][MOLES] += burned_fuel/TRITIUM_BURN_OXY_FACTOR
+=======
+			cached_gases[/datum/gas/carbon_dioxide][MOLES] += burned_fuel
+>>>>>>> 228af28... initial commit
 
 			cached_results[id] += burned_fuel
 
@@ -134,7 +214,10 @@
 		var/oxygen_burn_rate = 0
 		//more plasma released at higher temperatures
 		var/temperature_scale
+<<<<<<< HEAD
 		var/super_saturation
+=======
+>>>>>>> 228af28... initial commit
 		if(temperature > PLASMA_UPPER_TEMPERATURE)
 			temperature_scale = 1
 		else
@@ -142,25 +225,35 @@
 		if(temperature_scale > 0)
 			var/o2 = cached_gases[/datum/gas/oxygen] ? cached_gases[/datum/gas/oxygen][MOLES] : 0
 			oxygen_burn_rate = OXYGEN_BURN_RATE_BASE - temperature_scale
+<<<<<<< HEAD
 			if (o2 > cached_gases[/datum/gas/plasma][MOLES]*PLASMA_OXYGEN_FULLBURN)
 				plasma_burn_rate = (cached_gases[/datum/gas/plasma][MOLES]*temperature_scale)/PLASMA_BURN_RATE_DELTA
 			if(o2 / cached_gases[/datum/gas/plasma][MOLES] > SUPER_SATURATION_THRESHOLD) //supersaturation. Form Tritium.
 				super_saturation = TRUE
+=======
+>>>>>>> 228af28... initial commit
 			if(o2 > cached_gases[/datum/gas/plasma][MOLES]*PLASMA_OXYGEN_FULLBURN)
 				plasma_burn_rate = (cached_gases[/datum/gas/plasma][MOLES]*temperature_scale)/PLASMA_BURN_RATE_DELTA
 			else
 				plasma_burn_rate = (temperature_scale*(o2/PLASMA_OXYGEN_FULLBURN))/PLASMA_BURN_RATE_DELTA
+<<<<<<< HEAD
 
+=======
+>>>>>>> 228af28... initial commit
 			if(plasma_burn_rate > MINIMUM_HEAT_CAPACITY)
 				ASSERT_GAS(/datum/gas/carbon_dioxide, air) //don't need to assert o2, since if it isn't present we'll never reach this point anyway
 				cached_gases[/datum/gas/plasma][MOLES] = QUANTIZE(cached_gases[/datum/gas/plasma][MOLES] - plasma_burn_rate)
 				cached_gases[/datum/gas/oxygen][MOLES] = QUANTIZE(cached_gases[/datum/gas/oxygen][MOLES] - (plasma_burn_rate * oxygen_burn_rate))
+<<<<<<< HEAD
 				if (super_saturation)
 					ASSERT_GAS(/datum/gas/tritium,air)
 					cached_gases[/datum/gas/tritium][MOLES] += plasma_burn_rate
 				else
 					ASSERT_GAS(/datum/gas/carbon_dioxide,air)
 					cached_gases[/datum/gas/carbon_dioxide][MOLES] += plasma_burn_rate
+=======
+				cached_gases[/datum/gas/carbon_dioxide][MOLES] += plasma_burn_rate
+>>>>>>> 228af28... initial commit
 
 				energy_released += FIRE_PLASMA_ENERGY_RELEASED * (plasma_burn_rate)
 
@@ -183,9 +276,15 @@
 
 	return cached_results[id] ? REACTING : NO_REACTION
 
+<<<<<<< HEAD
 //fusion: a terrible idea that was fun but broken. Now reworked to be less broken and more interesting.
 /datum/gas_reaction/fusion
 	exclude = FALSE
+=======
+//fusion: a terrible idea that was fun to try. turns co2 and plasma into REALLY HOT oxygen and nitrogen. super exothermic lol
+/datum/gas_reaction/fusion
+	exclude = TRUE
+>>>>>>> 228af28... initial commit
 	priority = 2
 	name = "Plasmic Fusion"
 	id = "fusion"
@@ -194,13 +293,18 @@
 	min_requirements = list(
 		"ENER" = PLASMA_BINDING_ENERGY * 10,
 		/datum/gas/plasma = MINIMUM_HEAT_CAPACITY,
+<<<<<<< HEAD
 		/datum/gas/tritium = MINIMUM_HEAT_CAPACITY
+=======
+		/datum/gas/carbon_dioxide = MINIMUM_HEAT_CAPACITY
+>>>>>>> 228af28... initial commit
 	)
 
 /datum/gas_reaction/fusion/react(datum/gas_mixture/air)
 	var/list/cached_gases = air.gases
 	var/temperature = air.temperature
 
+<<<<<<< HEAD
 	if(((cached_gases[/datum/gas/plasma][MOLES]+cached_gases[/datum/gas/tritium][MOLES])/air.total_moles() < FUSION_PURITY_THRESHOLD) || air.return_pressure() < 10*ONE_ATMOSPHERE)
 		//Fusion wont occur if the level of impurities is too high or if there is too little pressure.
 		return NO_REACTION
@@ -382,3 +486,37 @@
 #undef CATALYST_COEFFICENT
 #undef FUSION_PURITY_THRESHOLD
 #undef FUSION_HEAT_DROPOFF
+=======
+	if((cached_gases[/datum/gas/plasma][MOLES]+cached_gases[/datum/gas/carbon_dioxide][MOLES])/air.total_moles() < FUSION_PURITY_THRESHOLD)
+		//Fusion wont occur if the level of impurities is too high.
+		return NO_REACTION
+
+	var/old_heat_capacity = air.heat_capacity()
+	var/carbon_efficency = min(cached_gases[/datum/gas/plasma][MOLES]/cached_gases[/datum/gas/carbon_dioxide][MOLES],MAX_CARBON_EFFICENCY)
+	var/reaction_energy = THERMAL_ENERGY(air)
+	var/moles_impurities = air.total_moles()-(cached_gases[/datum/gas/plasma][MOLES]+cached_gases[/datum/gas/carbon_dioxide][MOLES])
+
+	var/plasma_fused = (PLASMA_FUSED_COEFFICENT*carbon_efficency)*(temperature/PLASMA_BINDING_ENERGY)
+	var/carbon_catalyzed = (CARBON_CATALYST_COEFFICENT*carbon_efficency)*(temperature/PLASMA_BINDING_ENERGY)
+	var/oxygen_added = carbon_catalyzed
+	var/nitrogen_added = (plasma_fused-oxygen_added)-(THERMAL_ENERGY(air)/PLASMA_BINDING_ENERGY)
+
+	reaction_energy = max(reaction_energy+((carbon_efficency*cached_gases[/datum/gas/plasma][MOLES])/((moles_impurities/carbon_efficency)+2)*10)+((plasma_fused/(moles_impurities/carbon_efficency))*PLASMA_BINDING_ENERGY),0)
+
+	air.assert_gases(/datum/gas/oxygen, /datum/gas/nitrogen)
+
+	cached_gases[/datum/gas/plasma][MOLES] -= plasma_fused
+	cached_gases[/datum/gas/carbon_dioxide][MOLES] -= carbon_catalyzed
+	cached_gases[/datum/gas/oxygen][MOLES] += oxygen_added
+	cached_gases[/datum/gas/nitrogen][MOLES] += nitrogen_added
+
+	if(reaction_energy > 0)
+		var/new_heat_capacity = air.heat_capacity()
+		if(new_heat_capacity > MINIMUM_HEAT_CAPACITY)
+			air.temperature = max(((temperature*old_heat_capacity + reaction_energy)/new_heat_capacity),TCMB)
+			//Prevents whatever mechanism is causing it to hit negative temperatures.
+		return REACTING
+
+#undef REACTING
+#undef NO_REACTION
+>>>>>>> 228af28... initial commit

@@ -28,6 +28,12 @@
 	icon_state = "orange"
 	gas_type = /datum/gas/plasma
 
+<<<<<<< HEAD
+=======
+/obj/machinery/atmospherics/components/unary/tank/oxygen_agent_b
+	icon_state = "orange_2"
+	gas_type = /datum/gas/oxygen_agent_b
+>>>>>>> 228af28... initial commit
 
 /obj/machinery/atmospherics/components/unary/tank/oxygen
 	icon_state = "blue"

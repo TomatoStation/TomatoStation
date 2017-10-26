@@ -89,6 +89,7 @@
 			continue
 		thing.rad_act(strength)
 
+<<<<<<< HEAD
 		// This list should only be for types which don't get contaminated but you want to look in their contents
 		// If you don't want to look in their contents and you don't want to rad_act them: 
 		// modify the ignored_things list in __HELPERS/radiation.dm instead
@@ -104,9 +105,24 @@
 			continue
 		var/contamination_chance = (strength-RAD_MINIMUM_CONTAMINATION) * RAD_CONTAMINATION_CHANCE_COEFFICIENT * min(1, 1/(steps*range_modifier))
 		if(prob(contamination_chance)) // Only stronk rads get to have little baby rads
+=======
+		var/static/list/blacklisted = typecacheof(list( //These types will never be contaminated
+			/turf,
+			/mob,
+			/obj/structure/cable,
+			/obj/machinery/atmospherics
+			))
+		if(!can_contaminate || blacklisted[thing.type])
+			continue
+		if(prob((strength-RAD_MINIMUM_CONTAMINATION) * RAD_CONTAMINATION_CHANCE_COEFFICIENT * min(1/(steps*range_modifier), 1))) // Only stronk rads get to have little baby rads
+>>>>>>> 228af28... initial commit
 			var/datum/component/rad_insulation/insulation = thing.GetComponent(/datum/component/rad_insulation)
 			if(insulation && insulation.contamination_proof)
 				continue
 			else
+<<<<<<< HEAD
 				var/rad_strength = (strength-RAD_MINIMUM_CONTAMINATION) * RAD_CONTAMINATION_STR_COEFFICIENT
+=======
+				var/rad_strength = (strength-RAD_MINIMUM_CONTAMINATION) * RAD_CONTAMINATION_STR_COEFFICIENT * min(1/(steps*range_modifier), 1)
+>>>>>>> 228af28... initial commit
 				thing.AddComponent(/datum/component/radioactive, rad_strength, source)

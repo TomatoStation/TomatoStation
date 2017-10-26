@@ -454,7 +454,11 @@
 
 /datum/reagent/medicine/potass_iodide/on_mob_life(mob/living/M)
 	if(M.radiation > 0)
+<<<<<<< HEAD
 		M.radiation -= min(M.radiation, 8)
+=======
+		M.radiation -= min(M.radiation, 4)
+>>>>>>> 228af28... initial commit
 	..()
 
 /datum/reagent/medicine/pen_acid
@@ -466,7 +470,11 @@
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
 
 /datum/reagent/medicine/pen_acid/on_mob_life(mob/living/M)
+<<<<<<< HEAD
 	M.radiation -= max(M.radiation-RAD_MOB_SAFE, 0)/50
+=======
+	M.radiation -= max(M.radiation-RAD_MOB_SAFE, 0)/100
+>>>>>>> 228af28... initial commit
 	M.adjustToxLoss(-2*REM, 0)
 	for(var/datum/reagent/R in M.reagents.reagent_list)
 		if(R != src)

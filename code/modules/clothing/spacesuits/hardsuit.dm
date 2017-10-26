@@ -13,6 +13,7 @@
 	item_color = "engineering" //Determines used sprites: hardsuit[on]-[color] and hardsuit[on]-[color]2 (lying down sprite)
 	actions_types = list(/datum/action/item_action/toggle_helmet_light)
 
+<<<<<<< HEAD
 	var/rad_count = 0
 	var/rad_record = 0
 	var/grace_count = 0
@@ -27,6 +28,8 @@
 /obj/item/clothing/head/helmet/space/hardsuit/Destroy()
 	. = ..()
 	STOP_PROCESSING(SSobj, src)
+=======
+>>>>>>> 228af28... initial commit
 
 /obj/item/clothing/head/helmet/space/hardsuit/attack_self(mob/user)
 	on = !on
@@ -45,7 +48,10 @@
 	..()
 	if(suit)
 		suit.RemoveHelmet()
+<<<<<<< HEAD
 		soundloop.stop(user)
+=======
+>>>>>>> 228af28... initial commit
 
 /obj/item/clothing/head/helmet/space/hardsuit/item_action_slot_check(slot)
 	if(slot == slot_head)
@@ -56,11 +62,16 @@
 	if(slot != slot_head)
 		if(suit)
 			suit.RemoveHelmet()
+<<<<<<< HEAD
 			soundloop.stop(user)
 		else
 			qdel(src)
 	else
 		soundloop.start(user)
+=======
+		else
+			qdel(src)
+>>>>>>> 228af28... initial commit
 
 /obj/item/clothing/head/helmet/space/hardsuit/proc/display_visor_message(var/msg)
 	var/mob/wearer = loc
@@ -68,6 +79,7 @@
 		wearer.show_message("[icon2html(src, wearer)]<b><span class='robot'>[msg]</span></b>", 1)
 
 /obj/item/clothing/head/helmet/space/hardsuit/rad_act(severity)
+<<<<<<< HEAD
 	. = ..()
 	rad_count += severity
 
@@ -84,6 +96,11 @@
 	rad_count = 0
 
 	soundloop.last_radiation = rad_record
+=======
+	..()
+	if(severity > RAD_AMOUNT_EXTREME)
+		display_visor_message("Radiation pulse detected! Magnitude: <span class='green'>[severity]</span> RADs.")
+>>>>>>> 228af28... initial commit
 
 /obj/item/clothing/head/helmet/space/hardsuit/emp_act(severity)
 	..()

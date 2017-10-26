@@ -243,7 +243,11 @@
 	if(holder && holder.my_atom)
 		var/turf/open/T = get_turf(holder.my_atom)
 		if(istype(T))
+<<<<<<< HEAD
 			T.atmos_spawn_air("nitrogen=50;TEMP=2.7")
+=======
+			T.atmos_spawn_air("freon=50;TEMP=120")
+>>>>>>> 228af28... initial commit
 
 /datum/chemical_reaction/slime/slimefireproof
 	name = "Slime Fireproof"

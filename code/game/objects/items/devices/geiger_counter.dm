@@ -19,8 +19,20 @@
 	slot_flags = SLOT_BELT
 	materials = list(MAT_METAL = 150, MAT_GLASS = 150)
 
+<<<<<<< HEAD
 	var/grace = RAD_GRACE_PERIOD
 	var/datum/looping_sound/geiger/soundloop
+=======
+	var/muted = TRUE
+	var/danger = 0
+	var/grace = RAD_GRACE_PERIOD
+	var/static/list/sounds = list( //hah, static. get it?
+		list('sound/items/geiger/low1.ogg'=1, 'sound/items/geiger/low2.ogg'=1, 'sound/items/geiger/low3.ogg'=1, 'sound/items/geiger/low4.ogg'=1),
+		list('sound/items/geiger/med1.ogg'=1, 'sound/items/geiger/med2.ogg'=1, 'sound/items/geiger/med3.ogg'=1, 'sound/items/geiger/med4.ogg'=1),
+		list('sound/items/geiger/high1.ogg'=1, 'sound/items/geiger/high2.ogg'=1, 'sound/items/geiger/high3.ogg'=1, 'sound/items/geiger/high4.ogg'=1),
+		list('sound/items/geiger/ext1.ogg'=1, 'sound/items/geiger/ext2.ogg'=1, 'sound/items/geiger/ext3.ogg'=1, 'sound/items/geiger/ext4.ogg'=1)
+		)
+>>>>>>> 228af28... initial commit
 
 	var/scanning = FALSE
 	var/radiation_count = 0
@@ -33,7 +45,11 @@
 	. = ..()
 	START_PROCESSING(SSobj, src)
 
+<<<<<<< HEAD
 	soundloop = new(list(src), FALSE)
+=======
+	soundLoop()
+>>>>>>> 228af28... initial commit
 
 /obj/item/device/geiger_counter/Destroy()
 	STOP_PROCESSING(SSobj, src)
@@ -41,7 +57,10 @@
 
 /obj/item/device/geiger_counter/process()
 	update_icon()
+<<<<<<< HEAD
 	update_sound()
+=======
+>>>>>>> 228af28... initial commit
 
 	if(!scanning)
 		current_tick_amount = 0
@@ -58,6 +77,11 @@
 		grace--
 		if(grace <= 0)
 			radiation_count = 0
+<<<<<<< HEAD
+=======
+	
+	update_sound()
+>>>>>>> 228af28... initial commit
 
 	current_tick_amount = 0
 
@@ -108,6 +132,7 @@
 	..()
 
 /obj/item/device/geiger_counter/proc/update_sound()
+<<<<<<< HEAD
 	var/datum/looping_sound/geiger/loop = soundloop
 	if(!scanning)
 		loop.stop()
@@ -117,6 +142,30 @@
 		return
 	loop.last_radiation = radiation_count
 	loop.start()
+=======
+	switch(radiation_count)
+		if(RAD_BACKGROUND_RADIATION to RAD_LEVEL_MODERATE)
+			danger = 1
+		if(RAD_LEVEL_MODERATE to RAD_LEVEL_VERY_HIGH)
+			danger = 2
+		if(RAD_LEVEL_VERY_HIGH to RAD_LEVEL_CRITICAL)
+			danger = 3
+		if(RAD_LEVEL_CRITICAL to INFINITY)
+			danger = 4
+		else
+			danger = 0
+	if(!danger)
+		muted = TRUE
+	else if(muted)
+		muted = FALSE
+		soundLoop()
+
+/obj/item/device/geiger_counter/proc/soundLoop()
+	if(muted || !danger)
+		return
+	playsound(src, pickweight(sounds[danger]), 25)
+	addtimer(CALLBACK(src, .proc/soundLoop), 2)
+>>>>>>> 228af28... initial commit
 
 /obj/item/device/geiger_counter/rad_act(amount)
 	if(amount <= RAD_BACKGROUND_RADIATION || !scanning)
@@ -126,6 +175,14 @@
 
 /obj/item/device/geiger_counter/attack_self(mob/user)
 	scanning = !scanning
+<<<<<<< HEAD
+=======
+	if(!scanning)
+		muted = TRUE
+	else
+		muted = FALSE
+		soundLoop()
+>>>>>>> 228af28... initial commit
 	update_icon()
 	to_chat(user, "<span class='notice'>[icon2html(src, user)] You switch [scanning ? "on" : "off"] [src].</span>")
 

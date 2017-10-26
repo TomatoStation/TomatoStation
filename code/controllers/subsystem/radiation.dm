@@ -1,6 +1,7 @@
 PROCESSING_SUBSYSTEM_DEF(radiation)
 	name = "Radiation"
 	flags = SS_NO_INIT | SS_BACKGROUND
+<<<<<<< HEAD
 	priority = 25
 
 	var/list/warned_atoms = list()
@@ -39,3 +40,6 @@ PROCESSING_SUBSYSTEM_DEF(radiation)
 	src.next_warn = list()
 	last_warn = world.time
 	message_admins(msg)
+=======
+	priority = 25
+>>>>>>> 228af28... initial commit

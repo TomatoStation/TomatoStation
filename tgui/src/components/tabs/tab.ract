@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 {{#if shown}}
   {{yield}}
 {{/if}}
+=======
+{{#if shown}}
+  {{yield}}
+{{/if}}
+>>>>>>> 228af28... initial commit

@@ -173,6 +173,24 @@
 	overlay_color = "#FAFF00"
 	spawn_id = /datum/gas/bz
 
+<<<<<<< HEAD
+=======
+/obj/machinery/atmospherics/miner/freon
+	name = "\improper Freon Gas Miner"
+	overlay_color = "#00FFE5"
+	spawn_id = /datum/gas/freon
+
+/obj/machinery/atmospherics/miner/volatile_fuel
+	name = "\improper Volatile Fuel Gas Miner"
+	overlay_color = "#564040"
+	spawn_id = /datum/gas/volatile_fuel
+
+/obj/machinery/atmospherics/miner/agent_b
+	name = "\improper Agent B Gas Miner"
+	overlay_color = "#E81E24"
+	spawn_id = /datum/gas/oxygen_agent_b
+
+>>>>>>> 228af28... initial commit
 /obj/machinery/atmospherics/miner/water_vapor
 	name = "\improper Water Vapor Gas Miner"
 	overlay_color = "#99928E"

@@ -6,6 +6,7 @@ Ask ninjanomnom if they're around
 
 #define RAD_BACKGROUND_RADIATION 9 					// How much radiation is harmless to a mob, this is also when radiation waves stop spreading
 													// WARNING: Lowering this value significantly increases SSradiation load
+<<<<<<< HEAD
 
 // apply_effect((amount*RAD_MOB_COEFFICIENT)/max(1, (radiation**2)*RAD_OVERDOSE_REDUCTION), IRRADIATE, blocked)
 #define RAD_MOB_COEFFICIENT 0.20					// Radiation applied is multiplied by this
@@ -25,11 +26,34 @@ Ask ninjanomnom if they're around
 
 #define RAD_MOB_VOMIT 2000							// The amount of radiation to check for vomitting
 #define RAD_MOB_VOMIT_PROB 1						// Chance per tick of vomitting
+=======
+#define RAD_AMOUNT_LOW 50
+#define RAD_AMOUNT_MEDIUM 200
+#define RAD_AMOUNT_HIGH 500
+#define RAD_AMOUNT_EXTREME 1000
+
+// apply_effect(amount * RAD_MOB_COEFFICIENT, IRRADIATE, blocked)
+#define RAD_MOB_COEFFICIENT 0.25					// Radiation applied is multiplied by this
+
+#define RAD_LOSS_PER_TICK 1
+#define RAD_TOX_COEFFICIENT 0.05					// Toxin damage per tick coefficient
+
+#define RAD_MOB_SAFE 300							// How much stored radiation in a mob with no ill effects
+>>>>>>> 228af28... initial commit
 
 #define RAD_MOB_KNOCKDOWN 2000						// How much stored radiation to check for stunning
 #define RAD_MOB_KNOCKDOWN_PROB 1					// Chance of knockdown per tick when over threshold
 #define RAD_MOB_KNOCKDOWN_AMOUNT 3					// Amount of knockdown when it occurs
 
+<<<<<<< HEAD
+=======
+#define RAD_MOB_VOMIT 1500							// The amount of radiation to check for vomitting
+#define RAD_MOB_VOMIT_PROB 1						// Chance per tick of vomitting
+
+#define RAD_MOB_MUTATE 1000							// How much stored radiation to check for mutation
+#define RAD_MOB_HAIRLOSS 500						// How much stored radiation to check for hair loss
+
+>>>>>>> 228af28... initial commit
 #define RAD_NO_INSULATION 1.0						// For things that shouldn't become irradiated for whatever reason
 #define RAD_VERY_LIGHT_INSULATION 0.9				// What girders have
 #define RAD_LIGHT_INSULATION 0.8
@@ -40,6 +64,7 @@ Ask ninjanomnom if they're around
 
 // WARNING: The deines below could have disastrous consequences if tweaked incorrectly. See: The great SM purge of Oct.6.2017
 // contamination_chance = 		(strength-RAD_MINIMUM_CONTAMINATION) * RAD_CONTAMINATION_CHANCE_COEFFICIENT * min(1/(steps*RAD_DISTANCE_COEFFICIENT), 1))
+<<<<<<< HEAD
 // contamination_strength = 	(strength-RAD_MINIMUM_CONTAMINATION) * RAD_CONTAMINATION_STR_COEFFICIENT
 #define RAD_MINIMUM_CONTAMINATION 350				// How strong does a radiation wave have to be to contaminate objects
 #define RAD_CONTAMINATION_CHANCE_COEFFICIENT 0.005	// Higher means higher strength scaling contamination chance
@@ -47,3 +72,12 @@ Ask ninjanomnom if they're around
 #define RAD_DISTANCE_COEFFICIENT 1					// Lower means further rad spread
 
 #define RAD_HALF_LIFE 90							// The half-life of contaminated objects
+=======
+// contamination_strength = 	(strength-RAD_MINIMUM_CONTAMINATION) * RAD_CONTAMINATION_STR_COEFFICIENT * min(1/(steps*RAD_DISTANCE_COEFFICIENT), 1)
+#define RAD_MINIMUM_CONTAMINATION 300				// How strong does a radiation wave have to be to contaminate objects
+#define RAD_CONTAMINATION_CHANCE_COEFFICIENT 0.0075	// Higher means higher strength scaling contamination chance
+#define RAD_CONTAMINATION_STR_COEFFICIENT 0.5		// Higher means higher strength scaling contamination strength
+#define RAD_DISTANCE_COEFFICIENT 1					// Lower means further rad spread
+
+#define RAD_HALF_LIFE 150							// The half-life of contaminated objects
+>>>>>>> 228af28... initial commit

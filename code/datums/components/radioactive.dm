@@ -27,9 +27,12 @@
 		CRASH("Something that wasn't an atom was given /datum/component/radioactive")
 		return
 
+<<<<<<< HEAD
 	if(strength > RAD_MINIMUM_CONTAMINATION)
 		SSradiation.warn(src)
 
+=======
+>>>>>>> 228af28... initial commit
 	START_PROCESSING(SSradiation, src)
 
 /datum/component/radioactive/Destroy()
@@ -37,8 +40,14 @@
 	return ..()
 
 /datum/component/radioactive/process()
+<<<<<<< HEAD
 	if(hl3_release_date && prob(50))
 		radiation_pulse(parent, strength, RAD_DISTANCE_COEFFICIENT*2, FALSE, can_contaminate)
+=======
+	radiation_pulse(parent,strength,1,FALSE,can_contaminate)
+
+	if(hl3_release_date && prob(50))
+>>>>>>> 228af28... initial commit
 		strength -= strength / hl3_release_date
 		if(strength <= RAD_BACKGROUND_RADIATION)
 			qdel(src)
@@ -50,6 +59,10 @@
 		return
 	var/datum/component/radioactive/other = C
 	strength = max(strength, other.strength)
+<<<<<<< HEAD
+=======
+	return
+>>>>>>> 228af28... initial commit
 
 /datum/component/radioactive/proc/rad_examine(mob/user, atom/thing)
 	var/atom/master = parent
@@ -70,7 +83,10 @@
 /datum/component/radioactive/proc/rad_attack(atom/movable/target, mob/living/user)
 	radiation_pulse(parent, strength/20)
 	target.rad_act(strength/2)
+<<<<<<< HEAD
 	strength -= strength / hl3_release_date
+=======
+>>>>>>> 228af28... initial commit
 
 #undef RAD_AMOUNT_LOW
 #undef RAD_AMOUNT_MEDIUM

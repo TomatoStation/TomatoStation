@@ -106,7 +106,11 @@
 	slowdown = 2
 
 /turf/open/floor/holofloor/snow/cold
+<<<<<<< HEAD
 	initial_gas_mix = "nob=7500;TEMP=2.7"
+=======
+	initial_gas_mix = "freon=7500;TEMP=0"
+>>>>>>> 228af28... initial commit
 
 /turf/open/floor/holofloor/asteroid
 	name = "asteroid sand"

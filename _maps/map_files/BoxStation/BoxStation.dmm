@@ -53788,7 +53788,11 @@
 /turf/open/floor/plasteel,
 /area/engine/engineering)
 "cCW" = (
+<<<<<<< HEAD
 /obj/machinery/portable_atmospherics/canister/nitrous_oxide,
+=======
+/obj/machinery/portable_atmospherics/canister/freon,
+>>>>>>> 228af28... initial commit
 /turf/open/floor/plating,
 /area/engine/engineering)
 "cCY" = (
@@ -83682,7 +83686,11 @@ bVI
 cay
 ccw
 chY
+<<<<<<< HEAD
 ciZ
+=======
+cCW
+>>>>>>> 228af28... initial commit
 ciW
 ckB
 ckB

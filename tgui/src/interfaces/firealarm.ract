@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <script>
   component.exports = {
     computed: {
@@ -27,3 +28,34 @@
       </ui-section>
     {{/if}}
 </ui-display>
+=======
+<script>
+  component.exports = {
+    computed: {
+      seclevelState () {
+        switch (this.get('data.seclevel')) {
+          case 'blue': return 'average'
+          case 'red': return 'bad'
+          case 'delta': return 'bad bold'
+          default: return 'good'
+        }
+      }
+    }
+  }
+</script>
+
+<ui-display>
+    <ui-section label='Alert Level'>
+        <span class='{{seclevelState}}'>{{text.titleCase(data.seclevel)}}</span>
+    </ui-section>
+    <ui-section label='Controls'>
+        <ui-button icon='{{data.alarm ? "close" : "bell-o"}}' action='{{data.alarm ? "reset" : "alarm"}}'>
+            {{data.alarm ? "Reset" : "Activate"}}</ui-button>
+    </ui-section>
+    {{#if data.emagged}}
+      <ui-section label='Warning'>
+        <span class='bad bold'>Safety measures offline. Device may exhibit abnormal behavior.</span>
+      </ui-section>
+    {{/if}}
+</ui-display>
+>>>>>>> 228af28... initial commit

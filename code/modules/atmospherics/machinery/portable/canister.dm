@@ -43,6 +43,10 @@
 		"n2o" = /obj/machinery/portable_atmospherics/canister/nitrous_oxide,
 		"bz" = /obj/machinery/portable_atmospherics/canister/bz,
 		"air" = /obj/machinery/portable_atmospherics/canister/air,
+<<<<<<< HEAD
+=======
+		"freon" = /obj/machinery/portable_atmospherics/canister/freon,
+>>>>>>> 228af28... initial commit
 		"water vapor" = /obj/machinery/portable_atmospherics/canister/water_vapor,
 		"caution" = /obj/machinery/portable_atmospherics/canister,
 	)
@@ -78,6 +82,14 @@
 	icon_state = "orange"
 	gas_type = /datum/gas/plasma
 
+<<<<<<< HEAD
+=======
+/obj/machinery/portable_atmospherics/canister/agent_b
+	name = "agent b canister"
+	desc = "Oxygen Agent B. You're not quite sure what it does."
+	gas_type = /datum/gas/oxygen_agent_b
+
+>>>>>>> 228af28... initial commit
 /obj/machinery/portable_atmospherics/canister/bz
 	name = "BZ canister"
 	desc = "BZ, a powerful hallucinogenic nerve agent."
@@ -95,6 +107,7 @@
 	desc = "Pre-mixed air."
 	icon_state = "grey"
 
+<<<<<<< HEAD
 /obj/machinery/portable_atmospherics/canister/tritium
 	name = "tritium canister"
 	desc = "Tritium. Inhalation might cause irradiation."
@@ -119,6 +132,14 @@
 	name = "pluoxium canister"
 	desc = "Pluoxium. Like oxygen, but more bang for your buck."
 	gas_type = /datum/gas/pluoxium
+=======
+/obj/machinery/portable_atmospherics/canister/freon
+	name = "freon canister"
+	desc = "Freon. Great for the atmosphere!"
+	icon_state = "freon"
+	gas_type = /datum/gas/freon
+	starter_temp = 120
+>>>>>>> 228af28... initial commit
 
 /obj/machinery/portable_atmospherics/canister/water_vapor
 	name = "water vapor canister"
@@ -127,7 +148,10 @@
 	gas_type = /datum/gas/water_vapor
 	filled = 1
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 228af28... initial commit
 /obj/machinery/portable_atmospherics/canister/proc/get_time_left()
 	if(timing)
 		. = round(max(0, valve_timer - world.time) / 10, 1)
@@ -415,7 +439,11 @@
 						var/gas = air_contents.gases[id]
 						if(!gas[GAS_META][META_GAS_DANGER])
 							continue
+<<<<<<< HEAD
 						if(gas[MOLES] > (gas[GAS_META][META_GAS_MOLES_VISIBLE] || MOLES_GAS_VISIBLE)) //if moles_visible is undefined, default to default visibility
+=======
+						if(gas[MOLES] > (gas[GAS_META][META_GAS_MOLES_VISIBLE] || MOLES_PLASMA_VISIBLE)) //if moles_visible is undefined, default to plasma visibility
+>>>>>>> 228af28... initial commit
 							danger[gas[GAS_META][META_GAS_NAME]] = gas[MOLES] //ex. "plasma" = 20
 
 					if(danger.len)

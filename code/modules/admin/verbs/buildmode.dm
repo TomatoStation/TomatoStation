@@ -82,7 +82,10 @@
 	var/valueholder = "derp"
 	var/objholder = /obj/structure/closet
 	var/atom/movable/stored = null
+<<<<<<< HEAD
 	var/list/preview = list()
+=======
+>>>>>>> 228af28... initial commit
 
 /datum/buildmode/New(client/c)
 	create_buttons()
@@ -95,8 +98,11 @@
 	holder.screen -= buttons
 	holder.click_intercept = null
 	holder.show_popup_menus = 1
+<<<<<<< HEAD
 	usr.client.images -= preview
 	preview.Cut()
+=======
+>>>>>>> 228af28... initial commit
 	qdel(src)
 	return
 
@@ -153,7 +159,10 @@
 		if(AREA_BUILDMODE)
 			dat += "***********************************************************"
 			dat += "Left Mouse Button on turf/obj/mob      = Select corner"
+<<<<<<< HEAD
 			dat += "Right Mouse Button on turf/obj/mob     = Reset corner selection"
+=======
+>>>>>>> 228af28... initial commit
 			dat += "Right Mouse Button on buildmode button = Select generator"
 			dat += "***********************************************************"
 		if(COPY_BUILDMODE)
@@ -342,6 +351,7 @@
 					throw_atom.throw_at(object, 10, 1,user)
 					log_admin("Build Mode: [key_name(user)] threw [throw_atom] at [object] ([object.x],[object.y],[object.z])")
 		if(AREA_BUILDMODE)
+<<<<<<< HEAD
 			if(left_click) //rectangular
 				if(!cornerA)
 					cornerA = get_turf(object)
@@ -356,6 +366,15 @@
 					usr.client.images += preview
 					to_chat(user, "<span class='boldwarning'>Region selected, if you're happy with your selection left click again, otherwise right click.</span>")
 					return
+=======
+			if(!cornerA)
+				cornerA = get_turf(object)
+				return
+			if(cornerA && !cornerB)
+				cornerB = get_turf(object)
+
+			if(left_click) //rectangular
+>>>>>>> 228af28... initial commit
 				if(cornerA && cornerB)
 					if(!generator_path)
 						to_chat(user, "<span class='warning'>Select generator type first.</span>")
@@ -365,6 +384,7 @@
 						if(GLOB.reloading_map)
 							to_chat(user, "<span class='boldwarning'>You are already reloading an area! Please wait for it to fully finish loading before trying to load another!</span>")
 							return
+<<<<<<< HEAD
 					G.defineRegion(cornerA, cornerB, 1)
 					for(var/t in G.map)
 						preview += image('icons/turf/overlays.dmi', t ,"redOverlay")
@@ -377,6 +397,12 @@
 					cornerB = null
 					usr.client.images -= preview
 					preview.Cut()
+=======
+					G.defineRegion(cornerA,cornerB,1)
+					G.generate()
+					cornerA = null
+					cornerB = null
+>>>>>>> 228af28... initial commit
 					return
 			//Something wrong - Reset
 			cornerA = null

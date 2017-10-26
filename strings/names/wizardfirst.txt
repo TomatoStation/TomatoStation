@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Alatar
 Archchancellor
 Boccob
@@ -33,4 +34,41 @@ Vaarsuvius
 Vecna
 Yoda
 Zagyg
+=======
+Alatar
+Archchancellor
+Boccob
+Circe
+Dumbledor
+Elminister
+Gandalf
+Grimm
+Gulstaff
+Houdini
+Jim
+Kaschei
+Khelben
+Kreol
+Lina
+Merlin
+Mogan
+Mordenkainen
+Morgan
+Mystryl
+Nihilus
+Palando
+Prospero
+Radagast
+Raistlin
+Rasputin
+Saruman
+Tenser
+Terefi
+Tzeentch
+Urza
+Vaarsuvius
+Vecna
+Yoda
+Zagyg
+>>>>>>> 228af28... initial commit
 Zul

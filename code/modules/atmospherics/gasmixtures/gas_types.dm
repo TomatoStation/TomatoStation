@@ -58,7 +58,11 @@ GLOBAL_LIST_INIT(hardcoded_gases, list(/datum/gas/oxygen, /datum/gas/nitrogen, /
 	specific_heat = 200
 	name = "Plasma"
 	gas_overlay = "plasma"
+<<<<<<< HEAD
 	moles_visible = MOLES_GAS_VISIBLE
+=======
+	moles_visible = MOLES_PLASMA_VISIBLE
+>>>>>>> 228af28... initial commit
 	dangerous = TRUE
 
 /datum/gas/water_vapor
@@ -66,6 +70,7 @@ GLOBAL_LIST_INIT(hardcoded_gases, list(/datum/gas/oxygen, /datum/gas/nitrogen, /
 	specific_heat = 40
 	name = "Water Vapor"
 	gas_overlay = "water_vapor"
+<<<<<<< HEAD
 	moles_visible = MOLES_GAS_VISIBLE
 
 /datum/gas/hypernoblium
@@ -74,6 +79,16 @@ GLOBAL_LIST_INIT(hardcoded_gases, list(/datum/gas/oxygen, /datum/gas/nitrogen, /
 	name = "Hyper-noblium"
 	gas_overlay = "freon"
 	moles_visible = MOLES_GAS_VISIBLE
+=======
+	moles_visible = MOLES_PLASMA_VISIBLE
+
+/datum/gas/freon
+	id = "freon"
+	specific_heat = 2000
+	name = "Freon"
+	gas_overlay = "freon"
+	moles_visible = MOLES_PLASMA_VISIBLE
+>>>>>>> 228af28... initial commit
 	dangerous = TRUE
 
 /datum/gas/nitrous_oxide
@@ -84,6 +99,7 @@ GLOBAL_LIST_INIT(hardcoded_gases, list(/datum/gas/oxygen, /datum/gas/nitrogen, /
 	moles_visible = 1
 	dangerous = TRUE
 
+<<<<<<< HEAD
 /datum/gas/brown_gas //This is nitric oxide, but given generic name to avoid confusion with nitrous oxide(N20 vs. NO2)
 	id = "browns"
 	specific_heat = 20
@@ -99,6 +115,17 @@ GLOBAL_LIST_INIT(hardcoded_gases, list(/datum/gas/oxygen, /datum/gas/nitrogen, /
 	gas_overlay = "tritium"
 	moles_visible = MOLES_GAS_VISIBLE
 	dangerous = TRUE
+=======
+/datum/gas/oxygen_agent_b
+	id = "agent_b"
+	specific_heat = 300
+	name = "Oxygen Agent B"
+
+/datum/gas/volatile_fuel
+	id = "v_fuel"
+	specific_heat = 30
+	name = "Volatile Fuel"
+>>>>>>> 228af28... initial commit
 
 /datum/gas/bz
 	id = "bz"
@@ -106,6 +133,7 @@ GLOBAL_LIST_INIT(hardcoded_gases, list(/datum/gas/oxygen, /datum/gas/nitrogen, /
 	name = "BZ"
 	dangerous = TRUE
 
+<<<<<<< HEAD
 /datum/gas/stimulum
 	id = "stim"
 	specific_heat = 5
@@ -116,6 +144,8 @@ GLOBAL_LIST_INIT(hardcoded_gases, list(/datum/gas/oxygen, /datum/gas/nitrogen, /
 	specific_heat = 80
 	name = "Pluoxium"
 
+=======
+>>>>>>> 228af28... initial commit
 /obj/effect/overlay/gas
 	icon = 'icons/effects/tile_effects.dmi'
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT

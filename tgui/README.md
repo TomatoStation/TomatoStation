@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
 - [tgui](#tgui)
@@ -6,6 +7,16 @@
 	- [Copypasta](#copypasta)
 
 <!-- /TOC -->
+=======
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [tgui](#tgui)
+	- [Concepts](#concepts)
+	- [Using It](#using-it)
+	- [Copypasta](#copypasta)
+
+<!-- /TOC -->
+>>>>>>> 228af28... initial commit
 
 # tgui
 tgui is the user interface library of /tg/station. It is rendered clientside,  based on JSON data sent from the server. Clicks are processed on the server, in  a similar method to native BYOND `Topic()`.
